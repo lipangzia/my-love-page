@@ -76,7 +76,7 @@
         /* 背景照片样式 */
         .custom-bg {
             position: fixed;
-            top: 50%;
+            top: 40%; /* 💡 调整照片位置，往上移动 */
             left: 50%;
             transform: translate(-50%, -50%);
             width: 300px;
@@ -93,19 +93,22 @@
     <div class="container">
         <h2>欢迎来到爱的告白程序</h2>
         <input type="text" id="username" placeholder="请输入您的名字">
+        <!-- 💡 新增在一起的时间输入框 -->
+        <input type="text" id="date" placeholder="请输入在一起的时间">
         <button onclick="checkLogin()">登录</button>
         <div id="result"></div>
     </div>
 
     <script>
         // 背景照片文件名（确保与上传的照片文件名一致）
-        const PHOTO_URL = "background.jpg";
+        const PHOTO_URL = "bg.jpg";
 
         function checkLogin() {
             const username = document.getElementById('username').value;
+            const date = document.getElementById('date').value;
             const resultDiv = document.getElementById('result');
             
-            if(username.trim() === "尚小美") {
+            if (username.trim() === "尚小美" && date.trim() === "2022年7月6日") {
                 // 创建并显示照片
                 const bgPhoto = document.createElement('img');
                 bgPhoto.className = 'custom-bg';
@@ -118,10 +121,10 @@
                     bgPhoto.style.opacity = '0.9';
                 }, 100);
 
-                resultDiv.innerHTML = '<div class="heart">♥</div> 尚小美，我爱你！';
+                resultDiv.innerHTML = '<div class="heart">♥</div> 我爱你！';
                 resultDiv.style.display = 'block';
             } else {
-                resultDiv.innerHTML = '请输入正确的用户名';
+                resultDiv.innerHTML = '请输入正确的用户名和日期';
                 resultDiv.style.display = 'block';
                 resultDiv.style.color = '#ff4757';
                 setTimeout(() => {
