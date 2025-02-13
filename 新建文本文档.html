@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>爱的告白</title>
+    <style>
+        body {
+            font-family: '微软雅黑', sans-serif;
+            background: linear-gradient(135deg, #ff9a9e, #fad0c4);
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            margin: 0;
+            overflow: hidden;
+        }
+
+        .container {
+            background: rgba(255, 255, 255, 0.9);
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            position: relative;
+            z-index: 2;
+        }
+
+        input {
+            padding: 12px;
+            margin: 10px;
+            border: 2px solid #ff6b6b;
+            border-radius: 25px;
+            width: 200px;
+            font-size: 16px;
+        }
+
+        button {
+            padding: 12px 30px;
+            background: #ff6b6b;
+            color: white;
+            border: none;
+            border-radius: 25px;
+            cursor: pointer;
+            font-size: 16px;
+            transition: transform 0.3s;
+        }
+
+        button:hover {
+            transform: scale(1.1);
+            background: #ff4757;
+        }
+
+        #result {
+            margin-top: 20px;
+            font-size: 24px;
+            color: #ff6b6b;
+            display: none;
+        }
+
+        .heart {
+            color: #ff6b6b;
+            font-size: 48px;
+            animation: heartbeat 1.5s infinite;
+        }
+
+        @keyframes heartbeat {
+            0% { transform: scale(1); }
+            15% { transform: scale(1.3); }
+            30% { transform: scale(1); }
+            45% { transform: scale(1.15); }
+            60% { transform: scale(1); }
+        }
+
+        /* 背景照片样式 */
+        .custom-bg {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 300px;
+            height: auto;
+            border-radius: 15px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+            opacity: 0;
+            transition: opacity 1s ease-in-out;
+            z-index: 1;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>欢迎来到爱的告白程序</h2>
+        <input type="text" id="username" placeholder="请输入您的名字">
+        <button onclick="checkLogin()">登录</button>
+        <div id="result"></div>
+    </div>
+
+    <script>
+        // 背景照片文件名（确保与上传的照片文件名一致）
+        const PHOTO_URL = "background.jpg";
+
+        function checkLogin() {
+            const username = document.getElementById('username').value;
+            const resultDiv = document.getElementById('result');
+            
+            if(username.trim() === "尚小美") {
+                // 创建并显示照片
+                const bgPhoto = document.createElement('img');
+                bgPhoto.className = 'custom-bg';
+                bgPhoto.src = PHOTO_URL;
+                bgPhoto.alt = "特别背景";
+                document.body.appendChild(bgPhoto);
+                
+                // 渐显照片
+                setTimeout(() => {
+                    bgPhoto.style.opacity = '0.9';
+                }, 100);
+
+                resultDiv.innerHTML = '<div class="heart">♥</div> 尚小美，我爱你！';
+                resultDiv.style.display = 'block';
+            } else {
+                resultDiv.innerHTML = '请输入正确的用户名';
+                resultDiv.style.display = 'block';
+                resultDiv.style.color = '#ff4757';
+                setTimeout(() => {
+                    resultDiv.style.display = 'none';
+                }, 2000);
+            }
+        }
+    </script>
+</body>
+</html>
